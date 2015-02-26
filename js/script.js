@@ -1,5 +1,8 @@
-function onLoadEvent(func) {
-    var onload = window.onload;
+addLoadEvent(preparePlaceholder);
+addLoadEvent(prepareGallery);
+
+function addLoadEvent(func) {
+    var oldonload = window.onload;
     if(typeof window.onload != "function") {
         window.onload = func;
     } else {
@@ -26,7 +29,7 @@ function preparePlaceholder(){
     if(!document.getElementById("imagegallery")) return false;
 
     var placeholder = document.createElement("img");
-    placeholder.setAttribute("id", placeholder);
+    placeholder.setAttribute("id", "placeholder");
     placeholder.setAttribute("src", "images/DSC_0240.jpg");
     placeholder.setAttribute("alt", "my image gallery");
 
@@ -38,7 +41,7 @@ function preparePlaceholder(){
 
     var gallery = document.getElementById("imagegallery");
     insertAfter(placeholder, gallery);
-    insertAfter(description.placeholder);
+    insertAfter(description, placeholder);
 }
 
 function showPic(whichpic) {
