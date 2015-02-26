@@ -1,5 +1,45 @@
-window.onload = prepareGallery;
+function onLoadEvent(func) {
+    var onload = window.onload;
+    if(typeof window.onload != "function") {
+        window.onload = func;
+    } else {
+        window.onload = function () {
+            oldonload();
+            func();
+        }
+    }
+}
 
+function insertAfter(newEl, targetEl) {
+    var parent = targetEl.parentNode;
+    if(parent.lastChild == targetEl) {
+        parent.appendChild(newEl);
+    } else {
+        parent.insertBefore(newEl, targetEl.nextSibling);
+    }
+}
+
+function preparePlaceholder(){
+    if(!document.createElement) return false;
+    if(!document.createTextNode) return false;
+    if(!document.getElementById) return false;
+    if(!document.getElementById("imagegallery")) return false;
+
+    var placeholder = document.createElement("img");
+    placeholder.setAttribute("id", placeholder);
+    placeholder.setAttribute("src", "images/DSC_0240.jpg");
+    placeholder.setAttribute("alt", "my image gallery");
+
+    var description = document.createElement("p");
+    description.setAttribute("id", "description");
+    var desctext = document.createTextNode("Choose an image");
+
+    description.appendChild(desctext);
+
+    var gallery = document.getElementById("imagegallery");
+    insertAfter(placeholder, gallery);
+    insertAfter(description.placeholder);
+}
 
 function showPic(whichpic) {
     if (!document.getElementById("placeholder")) return true;
