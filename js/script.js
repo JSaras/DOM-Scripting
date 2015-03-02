@@ -94,6 +94,8 @@ function displayAbbreviations() {
     var defs = new Array();
 
     for (var i = 0; i < abbreviations.length; i++) {
+        var current_abbr    = abbreviations[i];
+        if (current_abbr.childNodes.length < 1 ) continue;
         var definition      = abbreviations[i].getAttribute('title');
         var key             = abbreviations[i].lastChild.nodeValue;
 
@@ -115,6 +117,8 @@ function displayAbbreviations() {
         dlist.appendChild(dtitle);
         dlist.appendChild(ddesc);
     }
+
+    if (dlist.childNodes.length < 1) return false;
 
     var header              = document.createElement('h2');
     var header_text         = document.createTextNode("Abbreviations");
